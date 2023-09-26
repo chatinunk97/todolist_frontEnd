@@ -1,8 +1,10 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Header from "../components/Header";
-import HomePage from "../pages/Homepage";
-import LoginPage from "../pages/Loginpage";
+import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/Registerpage";
+import LoginContext from "../context/login-context";
+import RegisterContext from "../context/register-context";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -13,8 +15,22 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "login", element: <LoginPage /> },
-      { path: "register", element: <RegisterPage /> },
+      {
+        path: "login",
+        element: (
+          <LoginContext>
+            <LoginPage />
+          </LoginContext>
+        ),
+      },
+      {
+        path: "register",
+        element: (
+          <RegisterContext>
+            <RegisterPage />
+          </RegisterContext>
+        ),
+      },
     ],
   },
 ]);
